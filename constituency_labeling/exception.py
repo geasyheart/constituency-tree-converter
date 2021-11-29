@@ -5,8 +5,9 @@ class ConstituencyLabelException(Exception):
     """base exception"""
     msg = 'constituency label base exception'
 
-    def __init__(self, msg: str):
-        self.msg = msg
+    def __init__(self, msg: str = ''):
+        if msg:
+            self.msg = msg
 
     def __repr__(self):
         return self.msg
