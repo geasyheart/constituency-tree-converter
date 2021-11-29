@@ -6,6 +6,12 @@ Look from the dataset labeled by NLTK,it is a bit counter-intuitive and it is ve
 
 Then this package provides a `LabelTree`, you can use this class to generate dataset, for example, `convert example1` and `convert example2`, and then use the `label_tree_to_nltk` method to convert them into data conforming to the NLTK label format. 
 
+## Install
+
+```bash
+pip install constituency-tree-labeling-tool
+```
+
 ## examples
 
 ### example1
