@@ -6,6 +6,7 @@ from unittest import TestCase
 import nltk
 
 from constituency_labeling import nltk_tree_to_label, label_tree_to_nltk
+from constituency_labeling import transform
 
 
 class TestConvert(TestCase):
@@ -28,6 +29,10 @@ class TestConvert(TestCase):
         ptree2.pretty_print()
 
     def test_batch_convert(self):
+        """
+        测试nltk和labeltree相互转换
+        :return:
+        """
         path = '/home/yuzhang/PycharmProjects/con-parser/src/data/train.noempty.txt'
         with open(path, 'r', encoding='utf-8') as f:
             for line in f:
@@ -36,3 +41,36 @@ class TestConvert(TestCase):
                 dt = nltk_tree_to_label(ptree)
                 ptree2 = label_tree_to_nltk(dt)
                 assert ptree == ptree2
+
+    def test_tree_seq_convert(self):
+        """
+        测试transform方法
+        :return:
+        """
+
+        def cut_words(t):
+            c = []
+            for tree in t.subtrees():
+                if tree.height() == 2:
+                    c.extend(tree.pos())
+            return c
+
+        path = '/home/yuzhang/PycharmProjects/con-parser/src/data/train.noempty.txt'
+        total_size, err_size = 0, 0
+        with open(path, 'r', encoding='utf-8') as f:
+
+            for line in f:
+                total_size += 1
+                line = line.strip()
+                ptree = nltk.tree.Tree.fromstring(line)
+
+                ptree2 = transform.Tree.build(
+                    transform.Tree.totree(cut_words(ptree), ptree.label()),  # 不一定是TOP
+                    transform.Tree.factorize(transform.Tree.binarize(ptree)[0])
+                )
+                try:
+
+                    assert ptree == ptree2, (ptree.pretty_print(), ptree2.pretty_print())
+                except AssertionError:
+                    err_size += 1
+        print(total_size, err_size)
