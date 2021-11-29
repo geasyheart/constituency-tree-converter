@@ -14,8 +14,11 @@ def label_tree_to_nltk(label_tree: LabelTree) -> nltk.tree.Tree:
     for node in label_tree.dfs(node=label_tree.root):
         if not node.children:
             lens = len(node.cut_words)
+            # 这里为叶子节点
             if lens == 1:
                 word, pos = node.cut_words[0]
+            # 这里为叶子节点的label
+            # 对于单个词进行标注label，需要额外增加一个Node
             elif lens == 0:
                 word, pos = '', node.label
             else:

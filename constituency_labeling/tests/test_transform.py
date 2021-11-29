@@ -18,9 +18,15 @@ sample = [
     },
     {
         'label': '引导句',
+        'cut_words': [],
+        'id': 'node-1234',
+        'parent': 'node-11'
+    },
+    {
+        'label': '',
         'cut_words': [('据中央时报报道', 'rph')],
         'id': 'node-123',
-        'parent': 'node-11'
+        'parent': 'node-1234'
 
     },
     {
