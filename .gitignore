@@ -3,3 +3,6 @@
 __pycache__/
 build/
 *.egg-info
+*.tar.gz
+*.whl
+dist/ # 不再上传，旧的自行忽略，从pypi下载。
