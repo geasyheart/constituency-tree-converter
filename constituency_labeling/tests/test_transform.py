@@ -1,6 +1,9 @@
 # -*- coding: utf8 -*-
 #
 # copied from test_label_tree.py
+import uuid
+from typing import List, Dict
+
 from constituency_labeling import label_tree_to_nltk
 from constituency_labeling.label_tree import LabelTree
 from nltk import tree
@@ -16,17 +19,12 @@ sample = [
         'id': 'node-11',  # just unique
         'parent': None
     },
+
     {
         'label': '引导句',
-        'cut_words': [],
-        'id': 'node-1234',
-        'parent': 'node-11'
-    },
-    {
-        'label': '',
         'cut_words': [('据中央时报报道', 'rph')],
         'id': 'node-123',
-        'parent': 'node-1234'
+        'parent': 'node-11'
 
     },
     {
@@ -104,9 +102,31 @@ sample = [
     },
 ]
 
+
+def extend_to_nltk(s: List[Dict]):
+    extend_nodes = []
+    for index, desc in enumerate(s):
+        if len(desc['cut_words']) == 1 and desc['label']:
+            # 进行扩充
+            new_parent = str(uuid.uuid4())
+            desc_rel = {
+                'label': desc['label'],
+                'cut_words': [],
+                'id': new_parent,
+                'parent': desc['parent']
+            }
+            desc['parent'] = new_parent
+            extend_nodes.append((index, desc_rel))
+    for i, d in extend_nodes:
+        s.insert(i, d)
+    return s
+
+
 if __name__ == '__main__':
     ltree = LabelTree()
-    ltree.generate_tree(sample)
+    new_sample = extend_to_nltk(sample)
+    ltree.generate_tree(new_sample)
+    ltree.pretty_tree(filename='t1.gv')
     nltk_tree = label_tree_to_nltk(ltree)
 
     nltk_tree_top = tree.Tree('TOP', [nltk_tree])
