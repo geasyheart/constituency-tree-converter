@@ -51,11 +51,35 @@ NP-PN-SBJ  |           NP    VP NP-SBJ  VP
 > convert example 2
 ![22.gv.pdf](./constituency_labeling/tests/examples/22.gv.svg)
 
+### example3
+
+```
+                        TOP                    
+                         |                      
+                        陈述句                    
+    _____________________|____                  
+   |         |                客体               
+   |         |            ____|________         
+   |         主体         转折句1          转折句2     
+   |      ___|___     ___|____      ___|____    
+  rph   org      v   t   n    c    t   t    n  
+   |     |       |   |   |    |    |   |    |   
+据中央时报报道  华为      说   虽然  今年  举步维艰  但是  未来  一片光明
+```
+
+To sequence:
+
+```
+[(0, 9, '陈述句'), (0, 3, '陈述句|<>'), (0, 1, '陈述句|<>'), (1, 3, '主体'), (1, 2, '主体|<>'), (2, 3, '主体|<>'), (3, 9, '客体'), (3, 6, '转折句1'), (3, 5, '转折句1|<>'), (3, 4, '转折句1|<>'), (4, 5, '转折句1|<>'), (5, 6, '转折句1|<>'), (6, 9, '转折句2'), (6, 8, '转折句2|<>'), (6, 7, '转折句2|<>'), (7, 8, '转折句2|<>'), (8, 9, '转折句2|<>')]
+
+```
+
+
 ##  More Usage: 
 
 1. [convert NLTK tree to LabelTree](./constituency_labeling/tests/test_convert.py)
 2. [use LabelTree or web frontend use](./constituency_labeling/tests/test_label_tree.py)
-
+3. [convert NLTK tree to sequence](./constituency_labeling/tests/test_transform.py)
 
 # 成分分析树标注工具
 

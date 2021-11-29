@@ -10,6 +10,7 @@ from constituency_labeling.label_tree import LabelTree, Node
 
 def label_tree_to_nltk(label_tree: LabelTree) -> nltk.tree.Tree:
     n1_n2_map = {}
+    # 1. 叶子节点
     for node in label_tree.dfs(node=label_tree.root):
         if not node.children:
             lens = len(node.cut_words)

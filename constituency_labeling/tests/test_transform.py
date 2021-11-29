@@ -1,10 +1,11 @@
 # -*- coding: utf8 -*-
 #
+# copied from test_label_tree.py
+from constituency_labeling import label_tree_to_nltk
 from constituency_labeling.label_tree import LabelTree
-from constituency_labeling.convert import label_tree_to_nltk, nltk_tree_to_label
-# 1. 举个例子，另外其中标注标准、分词、词性等信息都是随意指定的。
+from nltk import tree
+from constituency_labeling import transform
 
-# 2. 你可以自己增加TOP节点。
 sample = [
     {
         'label': '陈述句',
@@ -98,17 +99,25 @@ sample = [
 ]
 
 if __name__ == '__main__':
+    ltree = LabelTree()
+    ltree.generate_tree(sample)
+    nltk_tree = label_tree_to_nltk(ltree)
 
-    tree = LabelTree()
-    tree.generate_tree(nodes=sample)
-    # tree.pretty_tree(filename='l1.gv')
+    nltk_tree_top = tree.Tree('TOP', [nltk_tree])
+    nltk_tree_top.pretty_print()
 
-    nltk_tree = label_tree_to_nltk(tree)
-    nltk_tree.pretty_print()
+    # 1. 转成序列结构
+    to_sequence = transform.Tree.factorize(transform.Tree.binarize(nltk_tree_top)[0])
+    print(to_sequence)
+    # 2. 转回来
+    t2 = transform.Tree.totree([('据中央时报报道', 'rph'),
+                                ('华为', 'org'), ('说', 'v'),
+                                ('虽然', 't'), ('今年', 'n'), ('举步维艰', 'c'),
+                                ('但是', 't'), ('未来', 't'), ('一片光明', 'n')], 'TOP')
+    nltk_tree_top2 = transform.Tree.build(
+        t2,
+        to_sequence
+    )
+    nltk_tree_top2.pretty_print()
 
-    tree2 = nltk_tree_to_label(nltk_tree)
-    # tree2.pretty_tree(filename='l2.gv')
-
-    nltk_tree2 = label_tree_to_nltk(tree2)
-    nltk_tree2.pretty_print()
-    assert nltk_tree == nltk_tree2
+    assert nltk_tree_top2 == nltk_tree_top

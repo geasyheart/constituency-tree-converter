@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='constituency-tree-labeling-tool',
-    version='1.0.1',
+    version='1.0.2',
     packages=['constituency_labeling', 'constituency_labeling.tests'],
     url='https://github.com/geasyheart/constituency-tree-labeling-tool',
     license='MIT',
