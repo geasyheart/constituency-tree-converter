@@ -1,12 +1,12 @@
 # -*- coding: utf8 -*-
 #
-from typing import List, Optional, Dict, Iterable
+from typing import List, Optional, Dict, Iterable, Any
 
 from constituency_labeling.exception import DuplicateIdException
 
 
 class Node(object):
-    def __init__(self, id: str, cut_words: List, label: str, extra: Optional[Dict]):
+    def __init__(self, id: str, cut_words: Any, label: str, extra: Optional[Dict]):
         """
 
         :param id:  unique id
