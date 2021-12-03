@@ -40,7 +40,9 @@ class TestConvert(TestCase):
                 ptree = nltk.tree.Tree.fromstring(line)
                 dt = nltk_tree_to_label(ptree)
                 ptree2 = label_tree_to_nltk(dt)
+                dt2 = nltk_tree_to_label(ptree2)
                 assert ptree == ptree2
+                assert dt == dt2
 
     def test_tree_seq_convert(self):
         """

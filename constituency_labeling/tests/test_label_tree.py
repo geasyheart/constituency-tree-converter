@@ -1,7 +1,9 @@
 # -*- coding: utf8 -*-
 #
+from unittest import TestCase
+
 from constituency_labeling.label_tree import LabelTree
-from constituency_labeling.convert import label_tree_to_nltk, nltk_tree_to_label
+
 # 1. 举个例子，另外其中标注标准、分词、词性等信息都是随意指定的。
 
 # 2. 你可以自己增加TOP节点。
@@ -97,18 +99,36 @@ sample = [
     },
 ]
 
-if __name__ == '__main__':
 
-    tree = LabelTree()
-    tree.generate_tree(nodes=sample)
-    # tree.pretty_tree(filename='l1.gv')
+class TestLabelTree(TestCase):
+    def test_eq1(self):
+        tree = LabelTree()
+        tree.generate_tree(nodes=sample)
 
-    nltk_tree = label_tree_to_nltk(tree)
-    nltk_tree.pretty_print()
+        tree2 = LabelTree()
+        tree2.generate_tree(sample)
 
-    tree2 = nltk_tree_to_label(nltk_tree)
-    # tree2.pretty_tree(filename='l2.gv')
+        self.assertEqual(tree, tree2)
 
-    nltk_tree2 = label_tree_to_nltk(tree2)
-    nltk_tree2.pretty_print()
-    assert nltk_tree == nltk_tree2
+    def test_eq2(self):
+        tree = LabelTree()
+        tree.generate_tree(nodes=sample)
+
+        tree2 = LabelTree()
+        tree2.generate_tree(sample)
+
+        tree2.root.children = []
+        # tree2.root.cut_words = []
+
+        self.assertNotEqual(tree, tree2)
+
+    def test_eq3(self):
+        tree = LabelTree()
+        tree.generate_tree(nodes=sample)
+
+        tree2 = LabelTree()
+        tree2.generate_tree(sample)
+
+        tree2.root.cut_words = []
+
+        self.assertNotEqual(tree, tree2)

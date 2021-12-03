@@ -31,6 +31,16 @@ class Node(object):
     def add_child(self, node: 'Node'):
         self.children.append(node)
 
+    def __eq__(self, other):
+        t1 = self.__class__ is other.__class__
+        if not t1:
+            return False
+        return self.id == other.id and self.cut_words == other.cut_words \
+               and self.label == other.label and self.extract == other.extract
+
+    def __ne__(self, other):
+        return not self == other
+
 
 class LabelTree(object):
     def __init__(self):
@@ -108,3 +118,14 @@ class LabelTree(object):
         for node in self.dfs(node=self.root):
             if not node.children:
                 yield node
+
+    def __eq__(self, other):
+        t1 = self.__class__ is other.__class__
+        if not t1: return False
+
+        l1 = [_ for _ in self.dfs(node=self.root)]
+        l2 = [_ for _ in other.dfs(node=other.root)]
+        return l1 == l2
+
+    def __ne__(self, other):
+        return not self == other

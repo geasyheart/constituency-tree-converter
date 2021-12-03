@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 #
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 import nltk.tree
 
@@ -9,7 +9,7 @@ from constituency_labeling.label_tree import LabelTree, Node
 
 
 def label_tree_to_nltk(label_tree: LabelTree) -> nltk.tree.Tree:
-    n1_n2_map = {}
+    n1_n2_map: Dict[int, nltk.Tree] = {}
     # 1. 叶子节点
     for node in label_tree.dfs(node=label_tree.root):
         if not node.children:
@@ -23,16 +23,16 @@ def label_tree_to_nltk(label_tree: LabelTree) -> nltk.tree.Tree:
                 word, pos = '', node.label
             else:
                 raise LeaveNodeLengthError
-            n1_n2_map[node] = nltk.Tree(pos, [word])
+            n1_n2_map[id(node)] = nltk.Tree(pos, [word])
 
     # 2. 非叶子节点
     reverse_nodes = [nodes for nodes in label_tree.bfs(nodes=[label_tree.root])][::-1]
     for nodes in reverse_nodes:
         for node in nodes:
             if node.children:
-                t = nltk.Tree(node.label, [n1_n2_map[_] for _ in node.children])
-                n1_n2_map[node] = t
-    return n1_n2_map[label_tree.root]
+                t = nltk.Tree(node.label, [n1_n2_map[id(_)] for _ in node.children])
+                n1_n2_map[id(node)] = t
+    return n1_n2_map[id(label_tree.root)]
 
 
 def nltk_tree_to_label(tree: nltk.tree.Tree) -> LabelTree:
