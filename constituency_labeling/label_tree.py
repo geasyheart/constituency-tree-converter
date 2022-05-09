@@ -42,6 +42,9 @@ class Node(object):
         return not self == other
 
 
+LabelNode = Node
+
+
 class LabelTree(object):
     def __init__(self):
         self.id_node_map: Dict[str, Node] = {}

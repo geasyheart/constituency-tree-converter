@@ -61,7 +61,7 @@ def nltk_tree_to_label(tree: nltk.tree.Tree) -> LabelTree:
             if not is_leave_node(t):
                 node = Node(
                     id=f'node-{_id}',
-                    cut_words=[],
+                    cut_words=t.pos(),
                     label=t.label(),
                     extra={}
                 )
