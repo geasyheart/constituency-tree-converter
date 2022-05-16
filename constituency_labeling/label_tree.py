@@ -96,7 +96,7 @@ class LabelTree(object):
         for child in node.children:
             yield from self.dfs(node=child)
 
-    def pretty_tree(self, use_algo='dfs', filename="", format="svg"):
+    def pretty_tree(self, use_algo='dfs', filename="", format="svg", directory="", view=True):
         from graphviz import Digraph
         filename = filename or "tmp.gv"
         if use_algo == 'dfs':
@@ -114,7 +114,10 @@ class LabelTree(object):
                     g.node(name=str(node.id), label=str(node))
                     if node.parent:
                         g.edge(str(node.parent.id), str(node.id))
-        g.view(filename=filename, directory='./examples')
+        if view:
+            g.view(filename=filename, directory=directory or './examples')
+        else:
+            g.render(filename=filename, directory=directory, view=False)
 
     @property
     def leaves(self):
