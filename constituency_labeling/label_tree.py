@@ -117,7 +117,7 @@ class LabelTree(object):
         if view:
             g.view(filename=filename, directory=directory or './examples')
         else:
-            g.render(filename=filename, directory=directory, view=False)
+            g.render(filename=filename, directory=directory or './examples', view=False)
 
     @property
     def leaves(self):
