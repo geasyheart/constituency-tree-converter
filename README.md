@@ -33,7 +33,7 @@ pip install constituency-tree-labeling-tool
 
 > convert example 1
 
-![11.gv.pdf](./constituency_labeling/tests/examples/11.gv.svg)
+![11.gv.pdf](https://raw.githubusercontent.com/geasyheart/constituency-tree-labeling-tool/main/constituency_labeling/tests/examples/11.gv.svg)
 
 ### example2
 > NLTK example 2
@@ -55,7 +55,7 @@ NP-PN-SBJ  |           NP    VP NP-SBJ  VP
     广西     对           外     开放   成绩    斐然
 ```
 > convert example 2
-![22.gv.pdf](./constituency_labeling/tests/examples/22.gv.svg)
+![22.gv.pdf](https://raw.githubusercontent.com/geasyheart/constituency-tree-labeling-tool/main/constituency_labeling/tests/examples/22.gv.svg)
 
 ### example3
 
