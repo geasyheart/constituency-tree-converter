@@ -7,14 +7,14 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='constituency-tree-labeling-tool',
-    version='1.0.9',
-    packages=['constituency_labeling', 'constituency_labeling.tests'],
-    url='https://github.com/geasyheart/constituency-tree-labeling-tool',
+    name='constituency-tree-converter',
+    version='1.0.10',
+    packages=['con_tree_converter', ],
+    url='https://github.com/geasyheart/constituency-tree-converter',
     license='MIT',
     author='yuzhang',
     author_email='geasyheart@163.com',
-    description='constituency tree labeling tool',
+    description='constituency tree converter',
     long_description=long_description,
     long_description_content_type='text/markdown',
     python_requires='>=3.6',
