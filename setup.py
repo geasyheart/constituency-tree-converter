@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='constituency-tree-converter',
-    version='1.0.10',
+    version='1.0.11',
     packages=['con_tree_converter', ],
     url='https://github.com/geasyheart/constituency-tree-converter',
     license='MIT',

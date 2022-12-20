@@ -4,10 +4,10 @@
 import uuid
 from typing import List, Dict
 
-from constituency_labeling import label_tree_to_nltk
-from constituency_labeling.label_tree import LabelTree
+from con_tree_converter import label_tree_to_nltk
+from con_tree_converter.label_tree import LabelTree
 from nltk import tree
-from constituency_labeling import transform
+from con_tree_converter import transform
 
 sample = [
     {

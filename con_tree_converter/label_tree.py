@@ -2,7 +2,7 @@
 #
 from typing import List, Optional, Dict, Iterable, Any
 
-from constituency_labeling.exception import DuplicateIdException
+from con_tree_converter.exception import DuplicateIdException
 
 
 class Node(object):

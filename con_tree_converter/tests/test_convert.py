@@ -5,8 +5,7 @@ from unittest import TestCase
 
 import nltk
 
-from constituency_labeling import nltk_tree_to_label, label_tree_to_nltk
-from constituency_labeling import transform
+from con_tree_converter import nltk_tree_to_label, label_tree_to_nltk, transform
 
 
 class TestConvert(TestCase):

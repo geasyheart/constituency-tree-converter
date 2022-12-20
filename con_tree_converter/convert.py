@@ -4,8 +4,8 @@ from typing import List, Tuple, Dict
 
 import nltk.tree
 
-from constituency_labeling.exception import LeaveNodeLengthError
-from constituency_labeling.label_tree import LabelTree, Node
+from con_tree_converter.exception import LeaveNodeLengthError
+from con_tree_converter.label_tree import LabelTree, Node
 
 
 def label_tree_to_nltk(label_tree: LabelTree) -> nltk.tree.Tree:

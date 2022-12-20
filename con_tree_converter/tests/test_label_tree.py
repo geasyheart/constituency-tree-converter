@@ -2,7 +2,7 @@
 #
 from unittest import TestCase
 
-from constituency_labeling.label_tree import LabelTree
+from con_tree_converter.label_tree import LabelTree
 
 # 1. 举个例子，另外其中标注标准、分词、词性等信息都是随意指定的。
 

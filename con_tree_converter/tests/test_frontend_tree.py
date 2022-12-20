@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 #
-from constituency_labeling.frontend_tree import FrontendTree
+from con_tree_converter.frontend_tree import FrontendTree
 # 不一样的树格式
 sample = {
     "data": {
